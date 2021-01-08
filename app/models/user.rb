@@ -11,4 +11,3 @@ class User < ApplicationRecord
   validates :katakana_Last_name,  presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/}
   validates :birthday,            presence: true
 end
-katakana_first_name:katakana_Last_name,
