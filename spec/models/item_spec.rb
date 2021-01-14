@@ -54,25 +54,50 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
+    it "category_idが1では登録できないこと" do
+      @item.category_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category must be other than 1")
+    end
     it "state_idが空では登録できないこと" do
       @item.state_id = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("State can't be blank")
+    end
+    it "state_idが1では登録できないこと" do
+      @item.state_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("State must be other than 1")
     end
     it "burden_idが空では登録できないこと" do
       @item.burden_id = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Burden can't be blank")
     end
+    it "burden_idが1では登録できないこと" do
+      @item.burden_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Burden must be other than 1")
+    end
     it "area_idが空では登録できないこと" do
       @item.area_id = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Area can't be blank")
     end
+    it "area_idが1では登録できないこと" do
+      @item.area_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Area must be other than 1")
+    end
     it "day_idが空では登録できないこと" do
       @item.day_id = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Day can't be blank")
+    end
+    it "day_idが空では登録できないこと" do
+      @item.day_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Day must be other than 1")
     end
 
   end
