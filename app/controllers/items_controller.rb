@@ -21,6 +21,14 @@ class ItemsController < ApplicationController
   end
   def edit
     @item = Item.find(params[:id])
+    if user_signed_in?
+      if current_user.id == @item.user_id
+      else
+        redirect_to root_path
+      end
+    else
+      redirect_to new_user_session_path
+    end
   end
   def update
     @item = Item.find(params[:id])
