@@ -41,6 +41,12 @@ RSpec.describe ItemForm, type: :model do
         expect(@item_form.errors.full_messages).to include("Area can't be blank", "Area is not a number")
       end
 
+      it "area_idが1では登録できないこと" do
+        @item_form.area_id = 1
+        @item_form.valid?
+        expect(@item_form.errors.full_messages).to include("Area must be other than 1")
+      end
+
       it "postalが空では登録できないこと" do
         @item_form.postal = nil
         @item_form.valid?

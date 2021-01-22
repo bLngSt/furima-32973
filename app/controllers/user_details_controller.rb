@@ -6,8 +6,6 @@ class UserDetailsController < ApplicationController
     if @item.item_history.blank?
       if current_user.id != @item.user_id 
         @item_form = ItemForm.new
-      else
-        redirect_to root_path
       end
     else
       redirect_to root_path
