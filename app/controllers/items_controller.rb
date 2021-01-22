@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path if current_user.id != @item.user_id 
+      redirect_to root_path if current_user.id != @item.user_id || @item.item_history.present?
   end
   def update
     if @item.update(item_params)
@@ -34,12 +34,12 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id != @item.user_id 
-      redirect_to root_path
-    else
-      @item.destroy
-      redirect_to root_path
-    end
+      if current_user.id != @item.user_id 
+        redirect_to root_path
+      else
+        @item.destroy
+        redirect_to root_path
+      end
   end
 
 
