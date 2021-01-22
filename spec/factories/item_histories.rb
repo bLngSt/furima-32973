@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :state do
+  factory :item_history do
     
   end
 end
