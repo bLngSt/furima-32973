@@ -90,10 +90,16 @@ RSpec.describe ItemForm, type: :model do
         expect(@item_form.errors.full_messages).to include("Phone is invalid")
       end
 
-      it "phoneが11桁以上では登録できないこと" do
-        @item_form.phone = "0901234567890"
+      it "phoneが英数混合では登録できないこと" do
+        @item_form.phone = "aaaaaaaaaaa"
         @item_form.valid?
         expect(@item_form.errors.full_messages).to include("Phone is invalid")
+      end
+
+      it "phoneが空では登録できないこと" do
+        @item_form.phone = nil
+        @item_form.valid?
+        expect(@item_form.errors.full_messages).to include("Phone can't be blank", "Phone is invalid")
       end
     end
   end

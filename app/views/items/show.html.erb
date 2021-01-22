@@ -22,8 +22,7 @@
         <%= @item.burden.name %>
       </span>
     </div>
-    <% if @item.item_history.blank? %>
-      <% if user_signed_in? %>
+    <% if @item.item_history.blank? && user_signed_in? %>
         <% if current_user.id == @item.user_id %>
           <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
           <p class='or-text'>or</p>
@@ -31,7 +30,6 @@
         <% else %>
           <%= link_to '購入画面に進む', item_user_details_path(@item.id) ,class:"item-red-btn"%>
         <% end %>
-      <% end %>
     <% end %>
     <div class="item-explain-box">
       <span><%= "商品説明" %></span>
