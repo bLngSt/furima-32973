@@ -1,11 +1,8 @@
 class UserDetailsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item
-
+  before_action :check_item, only: [:index, :create]
   def index
-      if current_user.id== @item.user_id || @item.item_history.present?
-        redirect_to root_path
-      end
       @item_form = ItemForm.new
   end
  
@@ -37,7 +34,11 @@ class UserDetailsController < ApplicationController
         card: user_detail_params[:token],
         currency: 'jpy'
       )
-    
+  end
+  def check_item
+    if current_user.id== @item.user_id || @item.item_history.present?
+      redirect_to root_path
+    end
   end
 end
 

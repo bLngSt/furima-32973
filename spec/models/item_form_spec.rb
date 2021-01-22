@@ -91,7 +91,25 @@ RSpec.describe ItemForm, type: :model do
       end
 
       it "phoneが英数混合では登録できないこと" do
-        @item_form.phone = "aaaaaaaaaaa"
+        @item_form.phone = "aa111111aaa"
+        @item_form.valid?
+        expect(@item_form.errors.full_messages).to include("Phone is invalid")
+      end
+
+      it "phoneが9桁以下では登録できないこと" do
+        @item_form.phone = "123456789"
+        @item_form.valid?
+        expect(@item_form.errors.full_messages).to include("Phone is invalid")
+      end
+
+      it "phoneが12桁以上では登録できないこと" do
+        @item_form.phone = "123123412345"
+        @item_form.valid?
+        expect(@item_form.errors.full_messages).to include("Phone is invalid")
+      end
+
+      it "phoneが全角数字では登録できないこと" do
+        @item_form.phone = "１２３１２３４１２３４"
         @item_form.valid?
         expect(@item_form.errors.full_messages).to include("Phone is invalid")
       end
