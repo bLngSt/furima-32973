@@ -3,8 +3,12 @@ class UserDetailsController < ApplicationController
   before_action :set_item
 
   def index
-    if current_user.id != @item.user_id 
-      @item_form = ItemForm.new
+    if @item.item_history.blank?
+      if current_user.id != @item.user_id 
+        @item_form = ItemForm.new
+      else
+        redirect_to root_path
+      end
     else
       redirect_to root_path
     end
@@ -12,13 +16,13 @@ class UserDetailsController < ApplicationController
  
   def create
     @item_form = ItemForm.new(user_detail_params)
-     if @item_form.valid?
-      pay_item
-      @item_form.save
-      return redirect_to root_path
-     else
-       render action: :index
-     end
+      if @item_form.valid?
+        pay_item
+        @item_form.save
+        return redirect_to root_path
+      else
+        render action: :index
+      end
   end
 
   private

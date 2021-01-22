@@ -17,6 +17,6 @@ class ItemForm
 
   def save
     item_history = ItemHistory.create(item_id: item_id, user_id: user_id)
-    UserDetail.create(postal:postal, city:city, address:address, phone:phone, item_history_id:item_history.id, area_id:area_id)
+    UserDetail.create(postal:postal, city:city, address:address, phone:phone, building:building, item_history_id:item_history.id, area_id:area_id)
   end
 end
